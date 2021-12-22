@@ -3,19 +3,27 @@ import { genTestUserSig } from "./lib/GenerateTestUserSig";
 
 TRTC.Logger.setLogLevel(TRTC.Logger.LogLevel.NONE);
 
-const userIdInput = document.getElementById("userId");
-const roomIdInput = document.getElementById("roomId");
-const joinButton = document.getElementById("joinButton");
-const leaveButton = document.getElementById("leaveButton");
+const userIdInput = $("#userId");
+const roomIdInput = $("#roomId");
+const joinButton = $("#joinButton");
+const leaveButton = $("#leaveButton");
 
-joinButton.addEventListener("click", start);
-leaveButton.addEventListener("click", leave);
+joinButton.on("click", start);
+leaveButton.on("click", leave);
+userIdInput.on("input", form);
+roomIdInput.on("input", form);
+
 const streams = [];
 let client;
+let isJoined = false;
 let localStream;
+let userId;
+let roomId;
 
 async function start() {
-  const userId = userIdInput.value;
+  userId = userIdInput.val();
+  roomId = roomIdInput.val();
+
   const result = genTestUserSig(userId);
   client = TRTC.createClient({
     mode: "rtc",
@@ -60,7 +68,7 @@ async function start() {
       class: "mute-button",
     }).appendTo(controlPanel);
 
-    volumeControl.on("change", (event) => {
+    volumeControl.on("input", (event) => {
       remoteStream.setAudioVolume(event.target.value);
     });
 
@@ -90,7 +98,7 @@ async function start() {
     $(`#${remoteStream.getId()}`).remove();
   });
 
-  await client.join({ roomId: Number(roomIdInput.value) });
+  await client.join({ roomId: Number(roomId) });
 
   localStream = TRTC.createStream({
     userId,
@@ -130,8 +138,10 @@ async function start() {
   await localStream.play(localStream.getId());
 
   await client.publish(localStream);
-  joinButton.disabled = true;
-  leaveButton.disabled = false;
+
+  isJoined = true;
+  joinButton.attr("disabled", true);
+  leaveButton.attr("disabled", false);
 }
 
 async function leave() {
@@ -141,7 +151,20 @@ async function leave() {
     $(`#${localStream.getId()}`).remove();
     client = undefined;
     localStream = undefined;
-    joinButton.disabled = false;
-    leaveButton.disabled = true;
+    userId = undefined;
+    roomId = undefined;
+    userIdInput.val("");
+    roomIdInput.val("");
+    joinButton.attr("disabled", true);
+    leaveButton.attr("disabled", true);
+    isJoined = false;
+  }
+}
+
+function form() {
+  if (!isJoined && userIdInput.val() && roomIdInput.val()) {
+    joinButton.attr("disabled", false);
+  } else {
+    joinButton.attr("disabled", true);
   }
 }
