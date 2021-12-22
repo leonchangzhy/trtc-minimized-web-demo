@@ -19,6 +19,16 @@ input {
 }
 
 .video-block {
+  display: flex;
   height: 300px;
   width: 300px;
+  flex-direction: column-reverse;
+  padding: 20px;
+}
+
+.control-panel {
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
