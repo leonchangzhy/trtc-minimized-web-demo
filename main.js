@@ -63,9 +63,9 @@ async function start() {
       step: "0.1",
     }).appendTo(controlPanel);
 
-    const muteRemoteButton = $("<button>camera</button>", {
-      id: remoteStream.getId() + "-mute-button",
-      class: "mute-button",
+    const remoteCamSwitch = $("<button>camera</button>", {
+      id: remoteStream.getId() + "-cam-switch",
+      class: "cam-switch",
     }).appendTo(controlPanel);
 
     volumeControl.on("input", (event) => {
@@ -74,7 +74,7 @@ async function start() {
 
     let isCamOn = true;
 
-    muteRemoteButton.on("click", (event) => {
+    remoteCamSwitch.on("click", (event) => {
       if (isCamOn) {
         isCamOn = !remoteStream.muteVideo();
       } else {
@@ -100,10 +100,13 @@ async function start() {
 
   await client.join({ roomId: Number(roomId) });
 
+  const cameras = await TRTC.getCameras();
+  const mics = await TRTC.getMicrophones();
+
   localStream = TRTC.createStream({
     userId,
-    audio: true,
-    video: true,
+    audio: mics.length ? true : false,
+    video: cameras.length ? true : false,
     mirror: true,
   });
 
@@ -113,26 +116,41 @@ async function start() {
   const videoBlock = $("<div>", {
     id: localStreamId,
     class: "video-block",
-  }).appendTo("#remoteVideo");
+  }).appendTo("#localVideo");
 
   const controlPanel = $("<div>", {
     id: localStreamId + "panel",
     class: "control-panel",
   }).appendTo(videoBlock);
 
-  const muteRemoteButton = $("<button>camera</button>", {
-    id: localStreamId + "-mute-button",
-    class: "mute-button",
+  const localCamSwitch = $("<button>camera</button>", {
+    id: localStreamId + "-cam-switch",
+    class: "cam-switch",
   }).appendTo(controlPanel);
 
+  const localMicSwitch = $("<button>mute</button>", {
+    id: localStreamId + "-mic-switch",
+    class: "mic-switch",
+  }).appendTo(controlPanel);
   let isLocalCamOn = true;
+  let isLocalMicOn = true;
 
-  muteRemoteButton.on("click", (event) => {
+  localCamSwitch.on("click", (event) => {
     if (isLocalCamOn) {
       isLocalCamOn = !localStream.muteVideo();
     } else {
       isLocalCamOn = localStream.unmuteVideo();
     }
+  });
+
+  localMicSwitch.on("click", (event) => {
+    if (isLocalMicOn) {
+      isLocalMicOn = !localStream.muteAudio();
+    } else {
+      isLocalMicOn = localStream.unmuteAudio();
+    }
+
+    localMicSwitch.text(isLocalMicOn ? "mute" : "unmute");
   });
 
   await localStream.play(localStream.getId());

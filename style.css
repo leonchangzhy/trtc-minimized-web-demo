@@ -2,12 +2,19 @@ video {
   height: 300px;
   width: 300px;
 }
+
 button {
   margin: 0 20px 0 0;
   width: 83px;
 }
+
 input {
   margin: 0 20px 0 0;
+}
+
+#video-panel {
+  display: flex;
+  flex-direction: row;
 }
 
 .video {
