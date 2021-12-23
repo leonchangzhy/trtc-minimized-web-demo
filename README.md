@@ -17,3 +17,8 @@ $ yarn
 ```console
 $ yarn dev
 ```
+
+### Built with
+
+- [ViteJs](https://vitejs.dev/)
+- [JQuery](https://jquery.com)
