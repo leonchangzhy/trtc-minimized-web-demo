@@ -1,6 +1,6 @@
 # TRTC-Demo
 
-A minimized web demo of [Tencent Real Time Communication (TRTC)](https://intl.cloud.tencent.com/products/trtc) using TRTC-WEB-SDK [trtc-js-sdk](https://www.npmjs.com/package/trtc-js-sdk) that allows you to do basic operations (create client, join/leave room, mute mic/camera).
+A minimized web demo of [Tencent Real Time Communication (TRTC)](https://intl.cloud.tencent.com/products/trtc) using [trtc-js-sdk](https://www.npmjs.com/package/trtc-js-sdk) that allows you to do basic operations (create client, join/leave room, mute mic/camera).
 
 ## Prerequisites
 
