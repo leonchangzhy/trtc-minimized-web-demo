@@ -7,10 +7,10 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "vite": "^2.7.2"
+    "vite": "2.7.4"
   },
   "dependencies": {
-    "jquery": "^3.6.0",
-    "trtc-js-sdk": "^4.11.11"
+    "jquery": "3.6.0",
+    "trtc-js-sdk": "4.11.11"
   }
 }

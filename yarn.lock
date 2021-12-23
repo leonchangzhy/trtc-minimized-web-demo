@@ -134,7 +134,7 @@ is-core-module@^2.2.0:
   dependencies:
     has "^1.0.3"
 
-jquery@^3.6.0:
+jquery@3.6.0:
   version "3.6.0"
   resolved "https://verdaccio.it.intanavi.jp/jquery/-/jquery-3.6.0.tgz#c72a09f15c1bdce142f49dbf1170bdf8adac2470"
   integrity sha512-JVzAR/AjBvVt2BmYhxRCSYysDsPcssdmTFnzyLEts9qNwmjmu4JTAMYubEfwVOSwpQ1I1sKKFcxhZCI2buerfw==
@@ -183,12 +183,12 @@ source-map-js@^1.0.1:
   resolved "https://verdaccio.it.intanavi.jp/source-map-js/-/source-map-js-1.0.1.tgz#a1741c131e3c77d048252adfa24e23b908670caf"
   integrity sha512-4+TN2b3tqOCd/kaGRJ/sTYA0tR0mdXx26ipdolxcwtJVqEnqNYvlCAt1q3ypy4QMlYus+Zh34RNtYLoq2oQ4IA==
 
-trtc-js-sdk@^4.11.11:
+trtc-js-sdk@4.11.11:
   version "4.11.11"
   resolved "https://verdaccio.it.intanavi.jp/trtc-js-sdk/-/trtc-js-sdk-4.11.11.tgz#70890f6f265298e3221b71c237b3218d75077488"
   integrity sha512-w79A5xT2XtlHHR2x+dEo1Fz+kMgVHugfSbfZx8UmccpvPaqFOBSLELxsGxOoevMdQl3lMp4BjwFoeBA0jL+BNg==
 
-vite@^2.7.2:
+vite@2.7.4:
   version "2.7.4"
   resolved "https://verdaccio.it.intanavi.jp/vite/-/vite-2.7.4.tgz#06f68f8909943f9fe582c26120b0c2b85894a05e"
   integrity sha512-f+0426k9R/roz5mRNwJlQ+6UOnhCwIypJSbfgCmsVzVJe9jTTM5iRX2GWYUean+iqPBWaU/dYLryx9AoH2pmrw==
